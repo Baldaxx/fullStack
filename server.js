@@ -3,13 +3,12 @@ const express = require("express");
 const app = express();
 const port = 3001;
 
-
 // Indique à l'application Express d'utiliser le dossier "public" pour servir des fichiers statiques tels que des images, des fichiers CSS ou des fichiers JavaScript:
 app.use(express.static("public"));
 // Permet de traiter les données JSON des requêtes HTTP entrantes dans l'application Express, simplifiant ainsi leur manipulation et leur utilisation:
 app.use(express.json());
 
-// BASE-DE-DONNE (Analogie du restaurant LE CUISINE DU RESTAURANT) Instanciation de la base de données :
+// BASE-DE-DONNE (Analogie du restaurant LA CUISINE DU RESTAURANT) Instanciation(ouverture) de la base de données:
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database(
   "./mydb.sqlite3",
@@ -22,10 +21,10 @@ const db = new sqlite3.Database(
     }
   }
 );
-// BASE-DE-DONNE Creation de la base de donnée:
+// (Analogie du restaurant LA CUISINE - 'CREATE' Mise en place de la cuisine - 'Id, author,content.....' Les plats du menu) Creation de la base de donnée: 
 db.serialize(function () {
-    db.run(`DROP TABLE IF EXISTS commentaires`);
-    db.run(`DROP TABLE IF EXISTS articles`);
+  db.run(`DROP TABLE IF EXISTS commentaires`);
+  db.run(`DROP TABLE IF EXISTS articles`);
   db.run(
     "CREATE TABLE articles (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT)"
   );
@@ -39,11 +38,9 @@ db.serialize(function () {
       )`);
 });
 
-
-
-// API (Analogie du restaurant UN SERVEUR DU RESTAURANT) Routes pour recuperer GET : 
+// API (Analogie du restaurant UN SERVEUR DU RESTAURANT) Routes pour recuperer GET :
 app.get("/api/articles", (req, res) => {
-    // Récupérer tous les articles de la base de données:
+  // Récupérer tous les articles de la base de données:
   db.all("SELECT * FROM articles", [], (err, rows) => {
     // Gère les résultats de la requête SQL. Si une erreur survient, elle est renvoyée avec un code d'erreur 500. Sinon, les données récupérées sont envoyées au client au format JSON:
     if (err) {
@@ -54,9 +51,7 @@ app.get("/api/articles", (req, res) => {
   });
 });
 
-
-
-// API (Analogie du restaurant UN SERVEUR DU RESTAURANT) Route pour poster POST : 
+// API (Analogie du restaurant UN SERVEUR DU RESTAURANT) Route pour poster POST :
 app.post("/api/articles", (req, res) => {
   // Regles metier (Gère les résultats de la requête SQL comme au dessus):
   const { title, content } = req.body;
@@ -78,24 +73,22 @@ app.post("/api/articles", (req, res) => {
   stmt.finalize();
 });
 
-
-
-// API (Analogie du restaurant UN SERVEUR DU RESTAURANT) Route pour effacer DELETE : 
+// API (Analogie du restaurant UN SERVEUR DU RESTAURANT) Route pour effacer DELETE :
 app.delete("/api/articles/:articleId", (req, res) => {
-    const articleId = req.params.articleId;
-    // Utiliser articleId pour identifier et supprimer l'article de la base de données.
-    db.run("DELETE FROM articles WHERE id = ?", [articleId], function(err) {
-      if (err) {
-        res.status(500).send(err.message);
-      } else {
-        res.status(200).send(`Article avec l'ID ${articleId} supprimé avec succès.`);
-      }
-    });
+  const articleId = req.params.articleId;
+  // Utiliser articleId pour identifier et supprimer l'article de la base de données.
+  db.run("DELETE FROM articles WHERE id = ?", [articleId], function (err) {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res
+        .status(200)
+        .send(`Article avec l'ID ${articleId} supprimé avec succès.`);
+    }
   });
+});
 
-
-
-// (Analogie du restaurant LE RESPONSABLE OUVRE LES PORTES DU RESTAURANT) Ecoute les requêtes et affiche un message indiquant que le serveur est en cours d'exécution: 
+// (Analogie du restaurant LE RESPONSABLE OUVRE LES PORTES DU RESTAURANT) Ecoute les requêtes et affiche un message indiquant que le serveur est en cours d'exécution:
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

@@ -1,0 +1,37 @@
+body {
+    background: url(Img/background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    color: white;
+    font-family: monospace;
+}
+
+.article-container {
+
+}
+
+.article-title {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.article-content {
+    color: #313131;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.article-title, .article-content {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#articles {
+    display: flex;
+    flex-direction: column;
+}

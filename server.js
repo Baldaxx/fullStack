@@ -1,7 +1,7 @@
 // (Analogie du restaurant RESPONSABLE DU RESTAURANT) Charge le module Express pour créer des serveurs web et gérer les requêtes HTTP dans une application Node.j :
 const express = require("express");
 const app = express();
-const port = 3001;
+const port = 3000;
 
 // Indique à l'application Express d'utiliser le dossier "public" pour servir des fichiers statiques tels que des images, des fichiers CSS ou des fichiers JavaScript:
 app.use(express.static("public"));

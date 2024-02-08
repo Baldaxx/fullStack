@@ -7,8 +7,8 @@ Leçon : Difference entre  le fichier serveur, la base de données et les api
 Dans cette leçon, nous allons utiliser une analogie d'un restaurant pour comprendre comment fonctionne un serveur web avec une base de données, en utilisant du code JavaScript avec Express.js et SQLite3 (Comme mySql).
 A regarder avec le code 
 
-1 Responsable du Restaurant (Fichier Serveur)
----------------------------------------------
+Responsable du Restaurant (Fichier Serveur)
+-------------------------------------------
 Notre responsable du restaurant ouvre le restaurant en utilisant Express.js.
 Il indique au serveur où trouver les menus, les images et autres fichiers statiques.
 Il assure que le restaurant peut comprendre et traiter les commandes en format JSON.

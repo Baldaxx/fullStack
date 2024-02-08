@@ -5,6 +5,7 @@ const app = express();
 // Port sur lequel on travail:
 const port = 3000;
 
+
 // Indique à l'application Express d'utiliser le dossier "public" pour servir des fichiers statiques tels que des images, des fichiers CSS ou des fichiers JavaScript:
 app.use(express.static("public"));
 // Permet de traiter les données JSON des requêtes HTTP entrantes dans l'application Express, simplifiant ainsi leur manipulation et leur utilisation:
@@ -25,6 +26,8 @@ const db = new sqlite3.Database(
   }
 );
 
+
+
 // Creation de la base de donnée (on retrouve la const db):
 db.serialize(function () {
     db.run(`DROP TABLE IF EXISTS commentaires`);
@@ -42,6 +45,8 @@ db.serialize(function () {
       )`);
 });
 
+
+
 // Routes pour recuperer GET :
 app.get("/api/articles", (req, res) => {
     // Récupérer tous les articles de la base de données:
@@ -54,6 +59,8 @@ app.get("/api/articles", (req, res) => {
     }
   });
 });
+
+
 
 // Route pour poster POST :
 app.post("/api/articles", (req, res) => {
@@ -76,6 +83,23 @@ app.post("/api/articles", (req, res) => {
   });
   stmt.finalize();
 });
+
+
+
+// Route pour effacer DELETE :
+app.delete("/api/articles/:articleId", (req, res) => {
+    const articleId = req.params.articleId;
+    // Utiliser articleId pour identifier et supprimer l'article de la base de données.
+    db.run("DELETE FROM articles WHERE id = ?", [articleId], function(err) {
+      if (err) {
+        res.status(500).send(err.message);
+      } else {
+        res.status(200).send(`Article avec l'ID ${articleId} supprimé avec succès.`);
+      }
+    });
+  });
+
+
 
 // Ecoute les requêtes sur un port spécifié et affiche un message indiquant que le serveur est en cours d'exécution
 app.listen(port, () => {

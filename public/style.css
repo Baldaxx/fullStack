@@ -7,31 +7,35 @@ body {
 h1 {
     color: white;
     font-family: monospace;
+    font-size: 38px;
 }
 
 .article-container {
-
+    border: 3px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 50%;
 }
 
 .article-title {
     color: #ffffff;
     font-size: 24px;
     font-weight: bold;
+    font-family: monospace;
 }
 
 .article-content {
     color: #313131;
     font-size: 16px;
     line-height: 1.5;
-}
-
-.article-title, .article-content {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #articles {
     display: flex;
     flex-direction: column;
+}
+
+.add-article {
+    padding-bottom: 10px;
 }

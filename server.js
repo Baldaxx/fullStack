@@ -1,9 +1,7 @@
-// Charge le module Express pour créer des serveurs web et gérer les requêtes HTTP dans une application Node.j:
+// (Analogie du restaurant RESPONSABLE DU RESTAURANT) Charge le module Express pour créer des serveurs web et gérer les requêtes HTTP dans une application Node.j :
 const express = require("express");
-// Sert à instancier un serveur Express:
 const app = express();
-// Port sur lequel on travail:
-const port = 3000;
+const port = 3001;
 
 
 // Indique à l'application Express d'utiliser le dossier "public" pour servir des fichiers statiques tels que des images, des fichiers CSS ou des fichiers JavaScript:
@@ -11,9 +9,8 @@ app.use(express.static("public"));
 // Permet de traiter les données JSON des requêtes HTTP entrantes dans l'application Express, simplifiant ainsi leur manipulation et leur utilisation:
 app.use(express.json());
 
-// Instanciation (ouverture):
+// BASE-DE-DONNE (Analogie du restaurant LE CUISINE DU RESTAURANT) Instanciation de la base de données :
 const sqlite3 = require("sqlite3").verbose();
-// La const suivante est tres importante:
 const db = new sqlite3.Database(
   "./mydb.sqlite3",
   sqlite3.OPEN_READWRITE,
@@ -25,10 +22,7 @@ const db = new sqlite3.Database(
     }
   }
 );
-
-
-
-// Creation de la base de donnée (on retrouve la const db):
+// BASE-DE-DONNE Creation de la base de donnée:
 db.serialize(function () {
     db.run(`DROP TABLE IF EXISTS commentaires`);
     db.run(`DROP TABLE IF EXISTS articles`);
@@ -47,7 +41,7 @@ db.serialize(function () {
 
 
 
-// Routes pour recuperer GET :
+// API (Analogie du restaurant UN SERVEUR DU RESTAURANT) Routes pour recuperer GET : 
 app.get("/api/articles", (req, res) => {
     // Récupérer tous les articles de la base de données:
   db.all("SELECT * FROM articles", [], (err, rows) => {
@@ -62,7 +56,7 @@ app.get("/api/articles", (req, res) => {
 
 
 
-// Route pour poster POST :
+// API (Analogie du restaurant UN SERVEUR DU RESTAURANT) Route pour poster POST : 
 app.post("/api/articles", (req, res) => {
   // Regles metier (Gère les résultats de la requête SQL comme au dessus):
   const { title, content } = req.body;
@@ -86,7 +80,7 @@ app.post("/api/articles", (req, res) => {
 
 
 
-// Route pour effacer DELETE :
+// API (Analogie du restaurant UN SERVEUR DU RESTAURANT) Route pour effacer DELETE : 
 app.delete("/api/articles/:articleId", (req, res) => {
     const articleId = req.params.articleId;
     // Utiliser articleId pour identifier et supprimer l'article de la base de données.
@@ -101,7 +95,7 @@ app.delete("/api/articles/:articleId", (req, res) => {
 
 
 
-// Ecoute les requêtes sur un port spécifié et affiche un message indiquant que le serveur est en cours d'exécution
+// (Analogie du restaurant LE RESPONSABLE OUVRE LES PORTES DU RESTAURANT) Ecoute les requêtes et affiche un message indiquant que le serveur est en cours d'exécution: 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

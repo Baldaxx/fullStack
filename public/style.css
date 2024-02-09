@@ -11,7 +11,7 @@ h1 {
 }
 
 .article-container {
-    border: 3px solid #ccc;
+    border: 3px solid #ececec;
     padding: 10px;
     margin-bottom: 20px;
     width: 50%;
@@ -38,4 +38,11 @@ h1 {
 
 .add-article {
     padding-bottom: 10px;
+}
+
+.form-label {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: monospace;
 }

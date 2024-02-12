@@ -12,38 +12,9 @@
     <div>
         <h1>Explorations et Aventures <br>des Vaches Astronautes => </h1>
     </div>
-    <div class="add-article"><button id="add-article-button">Ajouter un article</button></div>
+    <div class="articleUn"><p>Découvrez comment les vaches ont été les premiers animaux à voyager dans l'espace et à explorer les mystères de l'univers. <br>Suivez leur aventure depuis leur préparation sur Terre jusqu'à leur arrivée dans les étoiles.Plongez dans le quotidien fascinant des vaches astronautes et apprenez comment elles s'adaptent à la vie dans l'espace. <br>De la façon dont elles se nourrissent et se déplacent à la manière dont elles gèrent la gravité zéro, découvrez les défis uniques auxquels elles sont confrontées.Explorez les expériences scientifiques menées par les vaches astronautes pour mieux comprendre l'impact de l'environnement spatial sur les êtres vivants. <br>De la biologie à la physiologie en passant par la médecine, découvrez les contributions précieuses des vaches à la recherche spatiale.</p></div>
+    <div class="add-article"><button id="add-article-button">Ajouter un commentaire</button></div>
     <div id="articles"></div>
-
-    <script>
-        fetch('/api/articles')
-            .then(response => response.json())
-            .then(articles => {
-                const articlesDiv = document.getElementById('articles');
-                articles.forEach(article => {
-                    const articleElement = document.createElement('div');
-                    articleElement.classList.add('article-container');
-                    articleElement.innerHTML = `
-                <div class="article-title">${article.title}</div>
-                <div class="article-content">${article.content}</div>
-                <button class="article-comment-button">Commenter</button>`; 
-                    articlesDiv.appendChild(articleElement);
-                });
-            });
-    </script>
 <script src="script.js" defer></script>
 </body>
 </html>
-
-<!-- Contenu -->
-<!--Voyage Interstellaire des Vaches : Le Grand Départ"
-Contenu : Découvrez comment les vaches ont été les premiers animaux à voyager dans l'espace et à explorer les mystères de l'univers. Suivez leur aventure depuis leur préparation sur Terre jusqu'à leur arrivée dans les étoiles.
-
-"La Vie Quotidienne d'une Vache Astronaute"
-Contenu : Plongez dans le quotidien fascinant des vaches astronautes et apprenez comment elles s'adaptent à la vie dans l'espace. De la façon dont elles se nourrissent et se déplacent à la manière dont elles gèrent la gravité zéro, découvrez les défis uniques auxquels elles sont confrontées.
-
-"Les Expériences Scientifiques des Vaches dans l'Espace"
-Contenu : Explorez les expériences scientifiques menées par les vaches astronautes pour mieux comprendre l'impact de l'environnement spatial sur les êtres vivants. De la biologie à la physiologie en passant par la médecine, découvrez les contributions précieuses des vaches à la recherche spatiale.
-
-"Rencontre avec les Vaches Célestes : Les Rencontres du Troisième Type"
-Contenu : Découvrez les rencontres étonnantes entre les vaches astronautes et d'autres formes de vie extraterrestres. Explorez les récits fascinants de ces rencontres, des communications interstellaires aux échanges culturels. -->
